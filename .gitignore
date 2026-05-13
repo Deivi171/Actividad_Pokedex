@@ -1,0 +1,22 @@
+# Dependencias
+node_modules/
+
+# Expo
+.expo/
+
+# Build
+dist/
+build/
+
+# Variables de entorno
+.env
+.env.local
+.env*.local
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
