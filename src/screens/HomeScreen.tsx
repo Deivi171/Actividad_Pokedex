@@ -9,10 +9,16 @@ import {
 import { usePokemonList } from '../hooks/usePokemonList';
 import { PokemonCard } from '../components/PokemonCard';
 import { PokemonDetail } from '../types/pokemon';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../App';
+
+type NavProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
  // Pantalla principal que muestra los primeros 20
 export function HomeScreen() {
   const { pokemon, cargando, error } = usePokemonList();
+  const navigation = useNavigation<NavProp>();
 
   if (cargando) {
     return (
@@ -45,8 +51,13 @@ export function HomeScreen() {
         data={pokemon}
         keyExtractor={(item) => String(item.id)}
         numColumns={2}
-        renderItem={({ item }) => <PokemonCard pokemon={item} />}
+        renderItem={({ item }) => 
+        <PokemonCard
+        pokemon={item}
+        onPress={() => navigation.navigate('Detail', { pokemonId: item.id })}
+  />}
         contentContainerStyle={estilos.lista}
+
       />
     </View>
   );

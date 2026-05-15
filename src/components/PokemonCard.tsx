@@ -1,20 +1,21 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { PokemonDetail } from '../types/pokemon';
 import { COLORES_TIPO } from '../utils/constants';
 
 interface Props {
   pokemon: PokemonDetail;
+  onPress: () => void; //nueva prop
 }
 
-export function PokemonCard({ pokemon }: Props) {
+export function PokemonCard({ pokemon, onPress }: Props) {
   const numeroFormateado = `#${String(pokemon.id).padStart(3, '0')}`;
 
   const nombreCapitalizado =
     pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
 
   return (
-    <View style={estilos.tarjeta}>
+    <TouchableOpacity onPress={onPress} style={estilos.tarjeta}>
       <Image
         source={{ uri: pokemon.sprites.front_default }}
         style={estilos.imagen}
@@ -40,7 +41,7 @@ export function PokemonCard({ pokemon }: Props) {
           );
         })}
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 

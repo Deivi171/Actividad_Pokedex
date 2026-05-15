@@ -2,18 +2,16 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { HomeScreen } from './src/screens/HomeScreen';
+import { DetailScreen } from './src/screens/DetailScreen';
 
 export type RootStackParamList = {
   Home: undefined;
+  Detail: { pokemonId: number }; //parametro que viaja entre pantallas
 };
 
 // Crear el navegador de tipo stack con los tipos definidos arriba
 const Stack = createStackNavigator<RootStackParamList>();
 
-
- // Componente raíz de la app.  Configura el contenedor de navegación 
- // el stack con la pantalla principal.
- 
 export default function App() {
   return (
     <NavigationContainer>
@@ -37,6 +35,14 @@ export default function App() {
           component={HomeScreen}
           options={{ title: 'Pokédex' }}
         />
+        
+        <Stack.Screen
+          name="Detail"
+          component={DetailScreen}
+          options={{ title: 'Detalle' }}
+        />
+
+
       </Stack.Navigator>
     </NavigationContainer>
   );
